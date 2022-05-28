@@ -1,6 +1,6 @@
 /* leny/aklèt
  *
- * /src/app/app.jsx - App Entrypoint
+ * /src/app.jsx - App Entrypoint
  *
  * coded by leny
  * started at 29/05/2022

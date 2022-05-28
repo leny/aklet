@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "npx eslint --fix --cache src",
     "server": "npx nodemon src/server",
-    "work": "npx parcel src/app/index.html"
+    "work": "npx parcel"
   },
   "author": {
     "name": "leny",
@@ -14,6 +14,7 @@
     "url": "https://leny.me"
   },
   "license": "MIT",
+  "source": "src/index.html",
   "alias": {},
   "devDependencies": {
     "@babel/core": "~7.16.12",

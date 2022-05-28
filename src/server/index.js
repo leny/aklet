@@ -27,6 +27,7 @@ const app = fastify();
 const games = new Map();
 
 (async () => {
+    // TODO: link to parcel build
     app.get("/", () => "Hello World!");
 
     app.get("/start", async (_, reply) => {
