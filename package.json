@@ -36,7 +36,6 @@
   },
   "dependencies": {
     "axios": "~0.25.0",
-    "cheerio": "~1.0.0-rc.11",
     "fastify": "~3.29.0",
     "hashids": "~2.2.10",
     "ora": "~5.4.1",
