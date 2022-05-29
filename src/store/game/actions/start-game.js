@@ -9,6 +9,7 @@
 import {ACTION_PREPARE_GAME, ACTION_START_GAME} from "store/game/types";
 import axios from "axios";
 import {
+    DEBUG,
     WIKI_API_RANDOM_ARTICLE,
     EXTRACT_MINIMUM_WORD_SIZE,
     TITLE_MINIMUM_WORD_SIZE,
@@ -18,7 +19,15 @@ import HashIds from "hashids";
 const hashid = new HashIds();
 
 // TODO: split on non-word characters
-const parser = s => s.split(/\s+/).map(w => ({size: w.length}));
+const parser = s =>
+    s.split(/\s+/).map(w => ({
+        size: w.length,
+        value: {
+            display: w,
+            compare: w.toLowerCase(),
+        },
+        guessed: false,
+    }));
 
 export default () => async dispatch => {
     dispatch({type: ACTION_PREPARE_GAME});
@@ -28,7 +37,7 @@ export default () => async dispatch => {
         attempt = 0;
 
     do {
-        console.log(`fetch random article (attempt: ${++attempt})`);
+        DEBUG && console.log(`fetch random article (attempt: ${++attempt})`);
         // eslint-disable-next-line no-await-in-loop
         const {data} = await axios.get(WIKI_API_RANDOM_ARTICLE);
         article = data;
@@ -36,6 +45,8 @@ export default () => async dispatch => {
         parser(article.extract).length < EXTRACT_MINIMUM_WORD_SIZE ||
         parser(article.title).length > TITLE_MINIMUM_WORD_SIZE
     );
+    DEBUG && console.log("article(title):", article.title);
+    DEBUG && console.log("article(extract):", article.extract);
 
     // parse & prepare data
     const hash = hashid.encode(article.pageid);
