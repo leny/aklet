@@ -14,6 +14,7 @@ import classnames from "classnames";
 const Button = ({
     className,
     label,
+    children,
     disabled,
     loading = false,
     size = "normal",
@@ -32,13 +33,14 @@ const Button = ({
             className,
         )}
         onClick={onClick}>
-        {label}
+        {children||label}
     </button>
 );
 
 Button.propTypes = {
     type: PropTypes.string,
-    label: PropTypes.string.isRequired,
+    label: PropTypes.string,
+    children: PropTypes.node,
     variant: PropTypes.string,
     size: PropTypes.string,
     disabled: PropTypes.bool,
