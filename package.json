@@ -5,7 +5,7 @@
   "description": "A small exploration game on (french) Wikipedia",
   "scripts": {
     "lint": "npx eslint --fix --cache src",
-    "server": "npx nodemon src/server",
+    "server": "npx nodemon src/server/index.js --watch src/server",
     "work": "npx parcel"
   },
   "author": {
