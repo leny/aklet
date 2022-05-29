@@ -16,6 +16,7 @@ const Button = ({
     label,
     children,
     disabled,
+    title,
     loading = false,
     size = "normal",
     variant = "info",
@@ -25,6 +26,7 @@ const Button = ({
     <button
         type={type}
         disabled={disabled}
+        title={title}
         className={classnames(
             "button",
             `is-${variant}`,
@@ -40,6 +42,7 @@ const Button = ({
 Button.propTypes = {
     type: PropTypes.string,
     label: PropTypes.string,
+    title: PropTypes.string,
     children: PropTypes.node,
     variant: PropTypes.string,
     size: PropTypes.string,

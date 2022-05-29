@@ -8,10 +8,9 @@
 
 import classnames from "classnames";
 import PropTypes from "prop-types";
-import {useState, useContext, useCallback, useEffect} from "react";
+import {useState, useContext, useCallback} from "react";
 
 import {GameStoreContext} from "store/game";
-import {BSP} from "core/constants";
 import Button from "components/commons/button";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faRightFromBracket} from "@fortawesome/free-solid-svg-icons";
@@ -58,27 +57,26 @@ const Controls = ({onSubmitWord}) => {
     return (
         <>
             <form action={"#"} onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor={"word"} className={classnames("label")}>
-                        {"Mot:"}
-                    </label>
-                    <div className={classnames("field", "has-addons")}>
-                        <div className={classnames("control")}>
-                            <input
-                                className={classnames("input")}
-                                type={"text"}
-                                name={"word"}
-                                id={"word"}
-                                value={word}
-                                autoFocus
-                                onInput={handleWordInput}
-                            />
-                        </div>
-                        <div className={classnames("control")}>
-                            <Button type={"submit"} title={"Envoyer"}>
-                                <FontAwesomeIcon icon={faRightFromBracket} />
-                            </Button>
-                        </div>
+                <div className={classnames("field", "has-addons")}>
+                    <div className={classnames("control")}>
+                        <input
+                            className={classnames("input")}
+                            type={"text"}
+                            name={"word"}
+                            id={"word"}
+                            placeholder={"Mot"}
+                            value={word}
+                            autoFocus
+                            autoComplete={"off"}
+                            autoCorrect={"off"}
+                            autoCapitalize={"none"}
+                            onInput={handleWordInput}
+                        />
+                    </div>
+                    <div className={classnames("control")}>
+                        <Button type={"submit"} title={"Envoyer"}>
+                            <FontAwesomeIcon icon={faRightFromBracket} />
+                        </Button>
                     </div>
                 </div>
             </form>

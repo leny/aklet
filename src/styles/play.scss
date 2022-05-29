@@ -8,13 +8,12 @@
 
 .word {
     border-radius: .15rem;
-    background: hsl(0, 0%, 48%);
+    background: hsl(171, 100%, 41%);
     font-family: monospace;
 }
 
 .letter {
-
     & + .letter {
-        border-left: 1px dotted silver;
+        border-left: 1px dotted hsl(171, 100%, 96%);
     }
 }
