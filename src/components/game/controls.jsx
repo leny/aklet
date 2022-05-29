@@ -32,7 +32,7 @@ const Controls = ({onSubmitWord}) => {
         e => {
             e.preventDefault();
             if (word.trim()) {
-                onSubmitWord(word);
+                onSubmitWord(word.trim().toLowerCase());
                 setWord("");
             }
         },
@@ -41,15 +41,14 @@ const Controls = ({onSubmitWord}) => {
 
     let $words = <p>{"Entrez un mot pour commencer la partie."}</p>;
 
-    if (words.length) {
-        // TODO: reverse ol, start at proper index
+    if (words.size) {
+        const aWords = Array.from(words).reverse();
+
         $words = (
-            <ol>
-                {Array.from(words)
-                    .reverse()
-                    .map((w, i) => (
-                        <li key={`word_${i}`}>{w}</li>
-                    ))}
+            <ol className={classnames("words")} reversed start={aWords.length}>
+                {aWords.slice(0, 5).map((w, i) => (
+                    <li key={`word_${i}`}>{w}</li>
+                ))}
             </ol>
         );
     }

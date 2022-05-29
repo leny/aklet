@@ -6,6 +6,10 @@
  * started at 29/05/2022
  */
 
+.words {
+    list-style-position: inside;
+}
+
 .word {
     border-radius: .15rem;
     background: hsl(171, 100%, 41%);

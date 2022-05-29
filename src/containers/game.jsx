@@ -15,7 +15,7 @@ import {DEBUG} from "core/constants";
 import {
     STEP_LOADING,
     STEP_PLAY,
-    // STEP_CHECK,
+    STEP_CHECK,
     // STEP_RESULTS,
 } from "store/game/types";
 import {initState, reducer, GameStoreContext} from "store/game";
@@ -33,11 +33,10 @@ const GameContainer = () => {
 
     // launch game
     useEffect(() => {
-        // TODO
         dispatch(startGame());
     }, []);
 
-    if (state.step === STEP_PLAY) {
+    if ([STEP_PLAY, STEP_CHECK].includes(state.step)) {
         return (
             <GameStoreContextProvider value={{...state, dispatch}}>
                 <Play />

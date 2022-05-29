@@ -11,8 +11,14 @@ import PropTypes from "prop-types";
 
 import {BSP, NBSP} from "core/constants";
 
-const Word = ({size, value: {display, compare}, isWhitespace, isPunctuation, isGuessed}) => {
-    if (isGuessed||isPunctuation) {
+const Word = ({
+    size,
+    value: {display},
+    isWhitespace,
+    isPunctuation,
+    isGuessed,
+}) => {
+    if (isGuessed || isPunctuation) {
         return display;
     }
 
@@ -22,8 +28,10 @@ const Word = ({size, value: {display, compare}, isWhitespace, isPunctuation, isG
 
     return (
         <span className={classnames("word")}>
-            {Array.from(new Array(size).keys()).map((_,i)=>(
-                <span key={`letter_${i}`} className={classnames("letter")}>{NBSP}</span>
+            {Array.from(new Array(size).keys()).map((_, i) => (
+                <span key={`letter_${i}`} className={classnames("letter")}>
+                    {NBSP}
+                </span>
             ))}
         </span>
     );

@@ -17,15 +17,17 @@ import {GameStoreContext} from "store/game";
 import Article from "components/game/article";
 import Controls from "components/game/controls";
 
+import processWord from "store/game/actions/process-word";
+
 const Play = () => {
     const {
-        // dispatch,
-        article: {hash},
+        dispatch,
+        article: {hash, title, extract},
     } = useContext(GameStoreContext);
 
     const handleSubmitWord = useCallback(word => {
-        console.log("handleSubmitWord(word):", word);
-    }, []);
+        dispatch(processWord(word, title, extract));
+    }, [title, extract]);
 
     return (
         <div className={classnames("columns", "is-centered")}>
