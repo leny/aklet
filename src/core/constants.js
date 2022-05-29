@@ -6,5 +6,6 @@
  * started at 29/05/2022
  */
 
-export const SERVER_ROOT =
-    process.env.NODE_ENV === "production" ? "/" : "http://localhost:3000";
+export const DEBUG = process.env.NODE_ENV !== "production";
+
+export const SERVER_ROOT = DEBUG ? "http://localhost:3000" : "/";
