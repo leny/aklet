@@ -16,7 +16,7 @@ import {version} from "../../package.json";
 
 import Button from "components/commons/button";
 
-const MenuContainer = () => (
+const MenuContainer = ({onStartGame}) => (
     <div className={classnames("columns", "mt-5")}>
         <div
             className={classnames(
@@ -67,6 +67,7 @@ const MenuContainer = () => (
                     label={"Commencer une partie"}
                     size={"large"}
                     variant={"link"}
+                    onClick={()=>onStartGame()}
                 />
             </div>
             <hr />
@@ -84,6 +85,9 @@ const MenuContainer = () => (
         </div>
     </div>
 );
-MenuContainer.propTypes = {};
+
+MenuContainer.propTypes = {
+    onStartGame: PropTypes.func.isRequired,
+};
 
 export default MenuContainer;

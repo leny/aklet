@@ -6,7 +6,7 @@
  * started at 29/05/2022
  */
 
-import {useState, useEffect} from "react";
+import {useState, useEffect, useCallback} from "react";
 import classnames from "classnames";
 
 import "styles/main.scss";
@@ -17,22 +17,27 @@ import {MODE_MENU, MODE_GAME,
 } from "core/constants";
 
 import MenuContainer from "containers/menu";
+import GameContainer from "containers/game";
 
 const RootContainer = () => {
-    const [mode]=useState(MODE_MENU);
+    const [mode, setMode]=useState(MODE_MENU);
 
     useEffect(()=>{
         document.querySelector("html").style.backgroundImage = `url(${bcgImage})`;
     },[]);
 
+    const handleStartGame = useCallback(()=>{
+        setMode(MODE_GAME)
+    },[setMode])
+
     if (mode===MODE_GAME) {
         return (
-            <p>{"MODE_GAME"}</p>
+            <GameContainer />
         );
     }
 
     return (
-        <MenuContainer />
+        <MenuContainer onStartGame={handleStartGame} />
     );
 };
 
