@@ -16,7 +16,7 @@ import {BSP} from "core/constants";
 import Word from "components/game/word";
 
 const Article = () => {
-    const {title, extract} = useContext(GameStoreContext);
+    const {article:{ title, extract }} = useContext(GameStoreContext);
 
     return (
         <div>
@@ -28,7 +28,7 @@ const Article = () => {
                     </Fragment>
                 ))}
             </h3>
-            <p>
+            <p className={classnames("is-size-5")}>
                 {extract.map((word, i) => (
                     <Fragment key={`word_${i}`}>
                         <Word {...word} />

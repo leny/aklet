@@ -10,16 +10,22 @@ import "styles/play.scss";
 
 import classnames from "classnames";
 import PropTypes from "prop-types";
-import {useContext, useEffect, useRef} from "react";
+import {useContext, useCallback} from "react";
 
 import {GameStoreContext} from "store/game";
-import {NBSP} from "core/constants";
 
-import Button from "components/commons/button";
 import Article from "components/game/article";
+import Controls from "components/game/controls";
 
-const Play = ({showSetupChallengeButton, onRestart, onSetupChallenge}) => {
-    const {dispatch, game, hash, attempts, title, extract} = useContext(GameStoreContext);
+const Play = () => {
+    const {
+        // dispatch,
+        article: {hash},
+    } = useContext(GameStoreContext);
+
+    const handleSubmitWord = useCallback(word => {
+        console.log("handleSubmitWord(word):", word);
+    }, []);
 
     return (
         <div className={classnames("columns", "is-centered")}>
@@ -38,7 +44,6 @@ const Play = ({showSetupChallengeButton, onRestart, onSetupChallenge}) => {
                                 "is-align-items-center",
                             )}>
                             <span>{"Aklèt"}</span>
-                            <span>{`Coups: ${attempts}`}</span>
                             <small>{hash}</small>
                         </span>
                     </header>
@@ -48,7 +53,9 @@ const Play = ({showSetupChallengeButton, onRestart, onSetupChallenge}) => {
                                 className={classnames(
                                     "column",
                                     "is-one-third",
-                                )}></div>
+                                )}>
+                                <Controls onSubmitWord={handleSubmitWord} />
+                            </div>
                             <div className={classnames("column")}>
                                 <Article />
                             </div>
