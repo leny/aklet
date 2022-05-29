@@ -24,6 +24,8 @@ const PORT = 3000;
 const EXTRACT_MINIMUM_WORD_SIZE = 50;
 const app = fastify();
 
+app.register(require("@fastify/cors"), {});
+
 const games = new Map();
 
 (async () => {
