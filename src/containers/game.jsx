@@ -21,6 +21,9 @@ import {
 import {initState, reducer, GameStoreContext} from "store/game";
 
 import Loading from "components/game/loading";
+import Play from "components/game/play";
+
+import startGame from "store/game/actions/start-game";
 
 const {Provider: GameStoreContextProvider} = GameStoreContext;
 
@@ -31,8 +34,16 @@ const GameContainer = () => {
     // launch game
     useEffect(() => {
         // TODO
-        // dispatch(startGame())
+        dispatch(startGame());
     }, []);
+
+    if (state.step === STEP_PLAY) {
+        return (
+            <GameStoreContextProvider value={{...state, dispatch}}>
+                <Play />
+            </GameStoreContextProvider>
+        );
+    }
 
     // state === STEP_LOADING
     return (

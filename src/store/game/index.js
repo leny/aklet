@@ -23,28 +23,23 @@ export const GameStoreContext = createContext();
 export const initState = () => ({
     game: null, // String: id of your game (personal)
     hash: null, // String: hash of the article to find (to share)
-    title: null, // Array of Words
-    extract: null, // Array of Words
-    attempts: null, // Number: number of attempts (score)
+    title: [], // Array of Words
+    extract: [], // Array of Words
+    attempts: 0, // Number: number of attempts (score)
+    words: [], // Array of strings (guessed words)
     step: STEP_LOADING,
 });
 
 const reducersMap = new Map();
 
-reducersMap.set(
-    ACTION_PREPARE_GAME,
-    (state, {game, hash, title, extract, attempts}) => ({
-        game,
-        hash,
-        title,
-        extract,
-        attempts,
-        step: STEP_LOADING,
-    }),
-);
+reducersMap.set(ACTION_PREPARE_GAME, initState);
 
-reducersMap.set(ACTION_START_GAME, state => ({
+reducersMap.set(ACTION_START_GAME, (state, {game, hash, title, extract}) => ({
     ...state,
+    game,
+    hash,
+    title,
+    extract,
     step: STEP_PLAY,
 }));
 
