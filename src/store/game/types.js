@@ -14,3 +14,6 @@ export const STEP_SUMMARY = "summary";
 
 export const ACTION_PREPARE_GAME = "store.game.actions.action_prepare_game";
 export const ACTION_START_GAME = "store.game.actions.action_start_game";
+
+export const ACTION_SUBMIT_WORD = "store.game.actions.action_submit_word";
+export const ACTION_PROCESS_WORD = "store.game.actions.action_process_word";

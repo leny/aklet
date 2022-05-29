@@ -19,8 +19,8 @@ import tokenize from "@stdlib/nlp-tokenize";
 
 const hashid = new HashIds();
 const punctuation = ".,;:?+=-_()[]{}".split("");
+const whitespace = /\s+/i;
 
-// TODO: split on non-word characters
 const parser = s =>
     tokenize(s, true).map(w => ({
         size: w.length,
@@ -28,7 +28,7 @@ const parser = s =>
             display: w,
             compare: w.toLowerCase(),
         },
-        isWhitespace: /\s+/i.test(w),
+        isWhitespace: whitespace.test(w),
         isPunctuation: punctuation.includes(w),
         isGuessed: false,
     }));
