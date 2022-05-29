@@ -8,5 +8,8 @@
 
 import {createRoot} from "react-dom/client";
 
-const root = createRoot(document.querySelector("#app"));
-root.render(<p>{"Hello, Aklèt!"}</p>);
+import "bulma";
+
+import RootContainer from "containers/root";
+
+createRoot(document.querySelector("#app")).render(<RootContainer />);
