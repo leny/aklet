@@ -21,12 +21,20 @@ import {createContext} from "react";
 export const GameStoreContext = createContext();
 
 export const initState = () => ({
-    game: null, // String: id of your game (personal)
-    hash: null, // String: hash of the article to find (to share)
-    title: [], // Array of Words
-    extract: [], // Array of Words
-    attempts: 0, // Number: number of attempts (score)
-    words: [], // Array of strings (guessed words)
+    game: {
+        score: 0, // Number: attempts to find the article's title
+        words: [], // Array<String>: submitted words
+    },
+    source: {
+        title: null, // String: real title of the article
+        extract: null, // String: real extract of the article
+        url: null, // String: url of the article on wikipedia
+    },
+    article: {
+        hash: null, // String: hash of the article to find (to share)
+        title: null, // Array<Word>: obfuscated data of the title
+        extract: null, // Array<Word>: obfuscated data of the extract
+    },
     step: STEP_LOADING,
 });
 
@@ -34,12 +42,10 @@ const reducersMap = new Map();
 
 reducersMap.set(ACTION_PREPARE_GAME, initState);
 
-reducersMap.set(ACTION_START_GAME, (state, {game, hash, title, extract}) => ({
+reducersMap.set(ACTION_START_GAME, (state, {source, article}) => ({
     ...state,
-    game,
-    hash,
-    title,
-    extract,
+    source,
+    article,
     step: STEP_PLAY,
 }));
 

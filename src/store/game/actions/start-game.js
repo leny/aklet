@@ -8,14 +8,50 @@
 
 import {ACTION_PREPARE_GAME, ACTION_START_GAME} from "store/game/types";
 import axios from "axios";
-import {SERVER_ROOT} from "core/constants";
+import {
+    WIKI_API_RANDOM_ARTICLE,
+    EXTRACT_MINIMUM_WORD_SIZE,
+    TITLE_MINIMUM_WORD_SIZE,
+} from "core/constants";
+import HashIds from "hashids";
+
+const hashid = new HashIds();
+
+// TODO: split on non-word characters
+const parser = s => s.split(/\s+/).map(w => ({size: w.length}));
 
 export default () => async dispatch => {
     dispatch({type: ACTION_PREPARE_GAME});
 
-    const {data} = await axios.get(`${SERVER_ROOT}/start`);
+    // fetch article
+    let article,
+        attempt = 0;
 
-    const {game, hash, title, extract} = data;
+    do {
+        console.log(`fetch random article (attempt: ${++attempt})`);
+        // eslint-disable-next-line no-await-in-loop
+        const {data} = await axios.get(WIKI_API_RANDOM_ARTICLE);
+        article = data;
+    } while (
+        parser(article.extract).length < EXTRACT_MINIMUM_WORD_SIZE ||
+        parser(article.title).length > TITLE_MINIMUM_WORD_SIZE
+    );
 
-    dispatch({type: ACTION_START_GAME, game, hash, title, extract});
+    // parse & prepare data
+    const hash = hashid.encode(article.pageid);
+    const url = article.content_urls.desktop.page;
+    const rawTitle = article.title;
+    const rawExtract = article.extract;
+    const parsedTitle = parser(rawTitle);
+    const parsedExtract = parser(rawExtract);
+
+    dispatch({
+        type: ACTION_START_GAME,
+        source: {title: rawTitle, extract: rawExtract, url},
+        article: {
+            hash,
+            title: parsedTitle,
+            extract: parsedExtract,
+        },
+    });
 };
