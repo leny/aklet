@@ -15,18 +15,22 @@ import {
     TITLE_MINIMUM_WORD_SIZE,
 } from "core/constants";
 import HashIds from "hashids";
+import tokenize from "@stdlib/nlp-tokenize";
 
 const hashid = new HashIds();
+const punctuation = ".,;:?+=-_()[]{}".split("");
 
 // TODO: split on non-word characters
 const parser = s =>
-    s.split(/\s+/).map(w => ({
+    tokenize(s, true).map(w => ({
         size: w.length,
         value: {
             display: w,
             compare: w.toLowerCase(),
         },
-        guessed: false,
+        isWhitespace: /\s+/i.test(w),
+        isPunctuation: punctuation.includes(w),
+        isGuessed: false,
     }));
 
 export default () => async dispatch => {

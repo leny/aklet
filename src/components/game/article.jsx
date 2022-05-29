@@ -22,18 +22,12 @@ const Article = () => {
         <div>
             <h3 className={classnames("title", "mb-2")}>
                 {title.map((word, i) => (
-                    <Fragment key={`word_${i}`}>
-                        <Word {...word} />
-                        {BSP}
-                    </Fragment>
+                    <Word key={`word_${i}`} {...word} />
                 ))}
             </h3>
             <p className={classnames("is-size-5")}>
                 {extract.map((word, i) => (
-                    <Fragment key={`word_${i}`}>
-                        <Word {...word} />
-                        {BSP}
-                    </Fragment>
+                    <Word key={`word_${i}`} {...word} />
                 ))}
             </p>
         </div>

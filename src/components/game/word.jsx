@@ -8,15 +8,17 @@
 
 import classnames from "classnames";
 import PropTypes from "prop-types";
-import {useContext, useEffect, useRef} from "react";
 
-import {GameStoreContext} from "store/game";
-import {NBSP} from "core/constants";
+import {BSP, NBSP} from "core/constants";
 
-import Button from "components/commons/button";
+const Word = ({size, value: {display, compare}, isWhitespace, isPunctuation, isGuessed}) => {
+    if (isGuessed||isPunctuation) {
+        return display;
+    }
 
-const Word = ({size}) => {
-    const {title, extract} = useContext(GameStoreContext);
+    if (isWhitespace) {
+        return BSP;
+    }
 
     return (
         <span className={classnames("word")}>
@@ -29,6 +31,13 @@ const Word = ({size}) => {
 
 Word.propTypes = {
     size: PropTypes.number.isRequired,
+    value: PropTypes.shape({
+        display: PropTypes.string,
+        compare: PropTypes.string,
+    }),
+    isWhitespace: PropTypes.bool,
+    isPunctuation: PropTypes.bool,
+    isGuessed: PropTypes.bool,
 };
 
 export default Word;
